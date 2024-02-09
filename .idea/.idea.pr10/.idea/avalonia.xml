@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="pr10/AddGood.axaml" value="pr10/pr10.csproj" />
+        <entry key="pr10/AutWin.axaml" value="pr10/pr10.csproj" />
+        <entry key="pr10/GoodsPage.axaml" value="pr10/pr10.csproj" />
+        <entry key="pr10/MainWindow.axaml" value="pr10/pr10.csproj" />
+        <entry key="pr10/ProductPage.axaml" value="pr10/pr10.csproj" />
+        <entry key="pr10/ProductsPage.axaml" value="pr10/pr10.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
