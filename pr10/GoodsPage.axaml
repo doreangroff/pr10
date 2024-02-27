@@ -16,6 +16,7 @@
     <Panel Name="Panel">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+            <Button Name="BackBtn" Content=" ⬅" Background="Transparent" BorderBrush="CornflowerBlue" BorderThickness="2" Margin="5" Click="BackBtn_OnClick"></Button>
             <Button Name="AddBtn" Content="Добавить" Background="Transparent" BorderBrush="CornflowerBlue" BorderThickness="2" Margin="5" Click="AddBtn_OnClick"/>
             <Button Name="DeleteBtn" Content="Удалить" Background="Transparent" BorderBrush="CornflowerBlue" BorderThickness="2" Margin="5" Click="DeleteBtn_OnClick"/>
             <TextBlock Text="Поиск:" Margin="5 12 5 0"/>

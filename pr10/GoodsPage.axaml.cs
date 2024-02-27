@@ -22,14 +22,15 @@ public partial class GoodsPage : UserControl
     private ObservableCollection<Manufacturer> _manufacturers = new ObservableCollection<Manufacturer>();
     private string _sql = """
                             select article_number, good_name, measurement_name, measurement_id, cost, max_discount, manufacturer_name, manufacturer_id, supplier_name, supplier_id, category_name, category_id, current_discount, quantity_in_stock, description, image from goods
-                         join pro1_1.good_categories gc on gc.category_id = goods.category
-                         join pro1_1.manufacturers m on m.manufacturer_id = goods.manufacturer
-                         join pro1_1.suppliers s on s.supplier_id = goods.supplier
-                         join pro1_1.measurements m2 on m2.measurement_id = goods.measurement
+                         join pr10.good_categories gc on gc.category_id = goods.category
+                         join pr10.manufacturers m on m.manufacturer_id = goods.manufacturer
+                         join pr10.suppliers s on s.supplier_id = goods.supplier
+                         join pr10.measurements m2 on m2.measurement_id = goods.measurement
                          """;
 
     private bool flag = false;
     private bool _isGuest;
+    private string _username;
     
     public GoodsPage(bool isGuest)
     {
@@ -42,6 +43,7 @@ public partial class GoodsPage : UserControl
         }
         ShowTable(_sql);
         FillManufacturers();
+        
     }
 
     private void FillManufacturers()
@@ -212,6 +214,11 @@ public partial class GoodsPage : UserControl
                 edit.OnClosing += delegate { ShowTable(_sql); };
             }
         }
+        
+    }
+
+    private void BackBtn_OnClick(object? sender, RoutedEventArgs e)
+    {
         
     }
 }

@@ -149,6 +149,13 @@ public partial class AddGood : UserControl
     {
         try
         {
+            int amount = Convert.ToInt32(AmountTBox.Text);
+            int cost = Convert.ToInt32(CostTBox.Text);
+            if (amount < 0 || cost < 0)
+            {
+                var mbox = MessageBoxManager.GetMessageBoxStandard("Ошибка", "Количество или стоимость не могут быть отрицательными", ButtonEnum.Ok, Icon.Error);
+                var rbox = mbox.ShowAsync();
+            }
             _db.OpenConnection();
             string sql = """
                             insert into goods (article_number, good_name, measurement, cost, max_discount, manufacturer, supplier, category, current_discount, quantity_in_stock, description, image)

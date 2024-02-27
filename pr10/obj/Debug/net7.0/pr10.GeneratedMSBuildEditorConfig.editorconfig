@@ -13,22 +13,22 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = pr10
-build_property.ProjectDir = /home/KHPK.RU/student/RiderProjects/pr10/pr10/
+build_property.ProjectDir = C:\Users\User\RiderProjects\pr10\pr10\
 
-[/home/KHPK.RU/student/RiderProjects/pr10/pr10/AddGood.axaml]
+[C:/Users/User/RiderProjects/pr10/pr10/AddGood.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/KHPK.RU/student/RiderProjects/pr10/pr10/App.axaml]
+[C:/Users/User/RiderProjects/pr10/pr10/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/KHPK.RU/student/RiderProjects/pr10/pr10/AutWin.axaml]
+[C:/Users/User/RiderProjects/pr10/pr10/AutWin.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/KHPK.RU/student/RiderProjects/pr10/pr10/EditGood.axaml]
+[C:/Users/User/RiderProjects/pr10/pr10/EditGood.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/KHPK.RU/student/RiderProjects/pr10/pr10/GoodsPage.axaml]
+[C:/Users/User/RiderProjects/pr10/pr10/GoodsPage.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/home/KHPK.RU/student/RiderProjects/pr10/pr10/MainWindow.axaml]
+[C:/Users/User/RiderProjects/pr10/pr10/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
