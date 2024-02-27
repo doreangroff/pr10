@@ -42,7 +42,7 @@ public partial class EditGood : UserControl
         CurDiscTBox.Text = _good.CurrentDiscount.ToString();
         AmountTBox.Text = _good.QuantityInStock.ToString();
         DescriptionTBox.Text = _good.Description;
-        Image img = new Image();
+        /*Image img = new Image();
         
         
         using (MemoryStream memory = new MemoryStream())
@@ -54,7 +54,7 @@ public partial class EditGood : UserControl
             Avalonia.Media.Imaging.Bitmap AvIrBitmap = new Avalonia.Media.Imaging.Bitmap(memory);
         }
         
-        Bitmap bit = new Bitmap()
+        Bitmap bit = new Bitmap()*/
         FillCategories();
         FillSuppliers();
         FillMans();
