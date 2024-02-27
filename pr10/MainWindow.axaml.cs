@@ -5,16 +5,18 @@ namespace pr10;
 
 public partial class MainWindow : Window
 {
-    public MainWindow(string username)
+    private bool _isGuest;
+    public MainWindow(string username, bool isGuest)
     {
         InitializeComponent();
+        _isGuest = isGuest;
         Hello.Text += $", {username}";
     }
 
     private void ProductsBtn_OnClick(object? sender, RoutedEventArgs e)
     {
         MainPanel.Children.Clear();
-        GoodsPage productsPage = new GoodsPage();
+        GoodsPage productsPage = new GoodsPage(_isGuest);
         MainPanel.Children.Add(productsPage);
     }
 

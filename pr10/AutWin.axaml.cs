@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using MySqlConnector;
@@ -39,7 +40,7 @@ public partial class AutWin : Window
         if (table.Rows.Count > 0)
         {
             string username = table.Rows[0]["fio"].ToString();
-            MainWindow mainWindow = new MainWindow(username);
+            MainWindow mainWindow = new MainWindow(username, false);
             this.Hide();
             mainWindow.Show();
         }
@@ -61,6 +62,7 @@ public partial class AutWin : Window
             if (captchaNeed)
             {
                 CaptchaTBlock.Text = CreateCaptcha();
+                CaptchaTBlock.TextDecorations = TextDecorations.Strikethrough;
                 CaptchaTBlock.IsVisible = true;
                 CaptchaTBox.IsVisible = true;
             }
@@ -85,5 +87,13 @@ public partial class AutWin : Window
         }
 
         return captcha;
+    }
+
+    private void GuestBtn_OnClick(object? sender, RoutedEventArgs e)
+    {
+        string username = "Гость";
+        MainWindow mainWindow = new MainWindow(username, true);
+        this.Hide();
+        mainWindow.Show();
     }
 }

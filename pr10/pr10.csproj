@@ -28,5 +28,27 @@
       <AvaloniaResource Include="Images\evil.png" />
       <None Remove="Images\picture.png" />
       <AvaloniaResource Include="Images\picture.png" />
+      <None Remove="Images\swap.png" />
+      <AvaloniaResource Include="Images\swap.png" />
+      <None Remove="Images\B111C5.jpeg" />
+      <AvaloniaResource Include="Images\B111C5.jpeg" />
+      <None Remove="Images\E112C6.jpg" />
+      <AvaloniaResource Include="Images\E112C6.jpg" />
+      <None Remove="Images\K839K3.jpg" />
+      <AvaloniaResource Include="Images\K839K3.jpg" />
+      <None Remove="Images\L293S9.jpg" />
+      <AvaloniaResource Include="Images\L293S9.jpg" />
+      <None Remove="Images\M112C8.jpg" />
+      <AvaloniaResource Include="Images\M112C8.jpg" />
+      <None Remove="Images\M294G9.jpg" />
+      <AvaloniaResource Include="Images\M294G9.jpg" />
+      <None Remove="Images\M398S9.jpg" />
+      <AvaloniaResource Include="Images\M398S9.jpg" />
+      <None Remove="Images\N283K3.jpg" />
+      <AvaloniaResource Include="Images\N283K3.jpg" />
+      <None Remove="Images\S384K2.jpg" />
+      <AvaloniaResource Include="Images\S384K2.jpg" />
+      <None Remove="Images\T238C7.jpg" />
+      <AvaloniaResource Include="Images\T238C7.jpg" />
     </ItemGroup>
 </Project>

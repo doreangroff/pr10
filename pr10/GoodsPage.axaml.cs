@@ -21,16 +21,25 @@ public partial class GoodsPage : UserControl
     private ObservableCollection<Good> _goods = new ObservableCollection<Good>();
     private ObservableCollection<Manufacturer> _manufacturers = new ObservableCollection<Manufacturer>();
     private string _sql = """
-                            select article_number, good_name, measurement_name, cost, max_discount, manufacturer_name, supplier_name, category_name, current_discount, quantity_in_stock, description, image from goods
-                         join pr10.good_categories gc on gc.category_id = goods.category
-                         join pr10.manufacturers m on m.manufacturer_id = goods.manufacturer
-                         join pr10.suppliers s on s.supplier_id = goods.supplier
-                         join pr10.measurements m2 on m2.measurement_id = goods.measurement
+                            select article_number, good_name, measurement_name, measurement_id, cost, max_discount, manufacturer_name, manufacturer_id, supplier_name, supplier_id, category_name, category_id, current_discount, quantity_in_stock, description, image from goods
+                         join pro1_1.good_categories gc on gc.category_id = goods.category
+                         join pro1_1.manufacturers m on m.manufacturer_id = goods.manufacturer
+                         join pro1_1.suppliers s on s.supplier_id = goods.supplier
+                         join pro1_1.measurements m2 on m2.measurement_id = goods.measurement
                          """;
+
+    private bool flag = false;
+    private bool _isGuest;
     
-    public GoodsPage()
+    public GoodsPage(bool isGuest)
     {
         InitializeComponent();
+        _isGuest = isGuest;
+        if (isGuest)
+        {
+            AddBtn.IsVisible = false;
+            DeleteBtn.IsVisible = false;
+        }
         ShowTable(_sql);
         FillManufacturers();
     }
@@ -52,7 +61,7 @@ public partial class GoodsPage : UserControl
         }
         _db.CloseConnection();
         _manufacturers.Insert(0, new Manufacturer{ManufacturerName = "Все производители"});
-        FilterCBox.ItemsSource = _goods;
+        FilterCBox.ItemsSource = _manufacturers;
     }
 
     private void ShowTable(string sql)
@@ -67,11 +76,15 @@ public partial class GoodsPage : UserControl
                 ArticleNumber = reader.GetString("article_number"),
                 GoodName = reader.GetString("good_name"),
                 Measurment = reader.GetString("measurement_name"),
+                MeasurmentId = reader.GetInt32("measurement_id"),
                 Cost = reader.GetInt32("cost"),
                 MaxDiscount = reader.GetInt32("max_discount"),
                 Manufacturer = reader.GetString("manufacturer_name"),
+                ManufacturerId = reader.GetInt32("manufacturer_id"),
                 Supplier = reader.GetString("supplier_name"),
+                SupplierId = reader.GetInt32("supplier_id"),
                 Category = reader.GetString("category_name"),
+                CategoryId = reader.GetInt32("category_id"),
                 CurrentDiscount = reader.GetInt32("current_discount"),
                 QuantityInStock = reader.GetInt32("quantity_in_stock"),
                 Description = reader.GetString("description"),
@@ -86,13 +99,15 @@ public partial class GoodsPage : UserControl
     private void AddBtn_OnClick(object? sender, RoutedEventArgs e)
     {
         Panel.Children.Clear();
-        AddGood add = new AddGood(null);
+        AddGood add = new AddGood();
         Panel.Children.Add(add);
+        add.OnClosing += delegate { ShowTable(_sql); };
     }
 
     private async void DeleteBtn_OnClick(object? sender, RoutedEventArgs e)
     {
         Good selectedGood = LBoxProducts.SelectedItem as Good;
+        Console.Write(selectedGood.ArticleNumber);
         if (selectedGood != null)
         {
             var box = MessageBoxManager.GetMessageBoxStandard("Предупреждение", "Вы увренеы что хотите удалить?",
@@ -101,12 +116,14 @@ public partial class GoodsPage : UserControl
             if (result == ButtonResult.Yes)
             {
                 _db.OpenConnection();
-                string sql = "delete from goods where article_number = " + selectedGood.ArticleNumber;
+                string sql = $"delete from goods where article_number = '{selectedGood.ArticleNumber}'";
                 MySqlCommand cooman = new MySqlCommand(sql, _db.GetConnection());
                 cooman.ExecuteNonQuery();
+                _db.CloseConnection();
                 _goods.Remove(selectedGood);
                 var success = MessageBoxManager.GetMessageBoxStandard("Успех", "Данные удалены", ButtonEnum.Ok);
                 var result1 = success.ShowAsync();
+                ShowTable(_sql);
             }
             else
             {
@@ -155,27 +172,46 @@ public partial class GoodsPage : UserControl
 
     private void OrderByBtn_OnClick(object? sender, RoutedEventArgs e)
     {
-        if (OrderByCheckBox.IsChecked == true)
+        if (flag == true)
         {
-            ObservableCollection<Good> sort = new ObservableCollection<Good>(_goods.OrderBy(x => x.Cost).ToList());
-            LBoxProducts.ItemsSource = sort;
+            LBoxProducts.ItemsSource = _goods;
+            flag = false;
         }
         else
         {
-            ObservableCollection<Good> sort =
-                new ObservableCollection<Good>(_goods.OrderByDescending(x => x.Cost).ToList());
-            LBoxProducts.ItemsSource = sort;
+            if (OrderByCheckBox.IsChecked == true)
+            {
+                ObservableCollection<Good> sort = new ObservableCollection<Good>(_goods.OrderBy(x => x.Cost).ToList());
+                LBoxProducts.ItemsSource = sort;
+            }
+            else
+            {
+                ObservableCollection<Good> sort =
+                    new ObservableCollection<Good>(_goods.OrderByDescending(x => x.Cost).ToList());
+                LBoxProducts.ItemsSource = sort;
+                flag = true;
+            }
         }
+        
     }
 
     private void LBoxProducts_OnDoubleTapped(object? sender, TappedEventArgs e)
     {
-        Good selectedGood = LBoxProducts.SelectedItem as Good;
-        if (selectedGood != null)
+        if (_isGuest)
         {
-            Panel.Children.Clear();
-            AddGood add = new AddGood(selectedGood);
-            Panel.Children.Add(add);
+            return;
         }
+        else
+        {
+            Good selectedGood = LBoxProducts.SelectedItem as Good;
+            if (selectedGood != null)
+            {
+                Panel.Children.Clear();
+                EditGood edit = new EditGood(selectedGood);
+                Panel.Children.Add(edit);
+                edit.OnClosing += delegate { ShowTable(_sql); };
+            }
+        }
+        
     }
 }
